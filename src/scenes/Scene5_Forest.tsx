@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { BirthdayMessage, AgeMessage } from '../ui/BirthdayMessage';
 import { PhotoFrame } from '../ui/PhotoFrame';
 import { ForestParticles } from '../effects/ForestParticles';
+
 import { Equalizer } from '../effects/Equalizer';
 
 export function Scene5_Forest() {
