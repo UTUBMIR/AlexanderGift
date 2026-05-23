@@ -8,6 +8,7 @@ import { Scene5_Forest } from './scenes/Scene5_Forest';
 import { WhiteoutTransition } from './components/WhiteoutTransition';
 import { audioEngine } from './audio/AudioEngine';
 import { preAnalyzeBeats } from './audio/BeatAnalyzer';
+import { preloadResources } from './utils/preloader';
 
 type Scene = 'start' | 'loading' | 'explosion' | 'whiteout1' | 'grass' | 'earth' | 'whiteout2' | 'forest';
 
@@ -18,6 +19,7 @@ export default function App() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleStart = useCallback(async () => {
+    preloadResources();
     try {
       await audioEngine.startAudioContext();
     } catch { }

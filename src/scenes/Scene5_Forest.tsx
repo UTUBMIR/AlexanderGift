@@ -12,7 +12,7 @@ export function Scene5_Forest() {
       transition={{ duration: 2 }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1,
-        backgroundImage: 'url(/background.jpg)',
+        backgroundImage: 'url(./background.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
