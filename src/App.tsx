@@ -35,10 +35,30 @@ export default function App() {
       }
 
       try {
-        setLoadingStatus('Аналіз музики...');
+        setLoadingStatus('Завантаження аудіо...');
         await audioEngine.loadRoyalty('./royalty.mp3');
-        const beatInfo = await preAnalyzeBeats('./royalty.mp3');
-        audioEngine.setBeatTimestamps(beatInfo.beats);
+
+        const cacheKey = 'beatcache_royalty';
+        const cached = localStorage.getItem(cacheKey);
+        let beats: number[] | null = null;
+
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed.beats)) beats = parsed.beats;
+          } catch { localStorage.removeItem(cacheKey); }
+        }
+
+        if (beats) {
+          audioEngine.setBeatTimestamps(beats);
+        } else {
+          setLoadingStatus('Аналіз музики...');
+          const beatInfo = await preAnalyzeBeats('./royalty.mp3');
+          audioEngine.setBeatTimestamps(beatInfo.beats);
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify({ beats: beatInfo.beats, bpm: beatInfo.bpm }));
+          } catch {}
+        }
       } catch {
       }
 
