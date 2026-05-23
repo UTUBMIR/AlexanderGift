@@ -12,7 +12,7 @@ interface Props {
 export function Earth({ position = [0, 0, 0], size = 2, atmosphereColor = '#4488ff' }: Props) {
   const meshRef = useRef<THREE.Mesh>(null);
   const cloudRef = useRef<THREE.Mesh>(null);
-  const texture = useLoader(TextureLoader, '/earth.jpg');
+  const texture = useLoader(TextureLoader, './earth.jpg');
 
   useFrame(({ clock }) => {
     if (meshRef.current) meshRef.current.rotation.y = clock.elapsedTime * 0.1;

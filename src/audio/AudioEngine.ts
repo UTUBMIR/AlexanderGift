@@ -48,7 +48,7 @@ export class AudioEngine {
   }
 
   playTransition(): void {
-    const sfx = new Tone.Player({ url: '/transition.mp3', autostart: true }).toDestination();
+    const sfx = new Tone.Player({ url: './transition.mp3', autostart: true }).toDestination();
     sfx.volume.value = -6;
   }
 
