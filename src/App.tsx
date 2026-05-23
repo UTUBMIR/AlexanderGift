@@ -20,7 +20,7 @@ export default function App() {
   const handleStart = useCallback(async () => {
     try {
       await audioEngine.startAudioContext();
-    } catch {}
+    } catch { }
     setScene('loading');
 
     if (initRef.current) return;
@@ -36,8 +36,8 @@ export default function App() {
 
       try {
         setLoadingStatus('Аналіз музики...');
-        await audioEngine.loadRoyalty('/royalty.mp3');
-        const beatInfo = await preAnalyzeBeats('/royalty.mp3');
+        await audioEngine.loadRoyalty('./royalty.mp3');
+        const beatInfo = await preAnalyzeBeats('./royalty.mp3');
         audioEngine.setBeatTimestamps(beatInfo.beats);
       } catch {
       }
