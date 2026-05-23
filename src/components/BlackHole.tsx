@@ -8,8 +8,6 @@ interface Props {
 
 export function BlackHole({ intensity = 1 }: Props) {
   const groupRef = useRef<THREE.Group>(null);
-  const discRef = useRef<THREE.Mesh>(null);
-
   const discParticles = useMemo(() => {
     const count = 2000;
     const positions = new Float32Array(count * 3);
@@ -56,24 +54,9 @@ export function BlackHole({ intensity = 1 }: Props) {
 
       <points>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={discParticles.positions.length / 3}
-            array={discParticles.positions}
-            itemSize={3}
-          />
-          <bufferAttribute
-            attach="attributes-color"
-            count={discParticles.colors.length / 3}
-            array={discParticles.colors}
-            itemSize={3}
-          />
-          <bufferAttribute
-            attach="attributes-size"
-            count={discParticles.sizes.length}
-            array={discParticles.sizes}
-            itemSize={1}
-          />
+          <bufferAttribute attach="attributes-position" args={[discParticles.positions, 3]} />
+          <bufferAttribute attach="attributes-color" args={[discParticles.colors, 3]} />
+          <bufferAttribute attach="attributes-size" args={[discParticles.sizes, 1]} />
         </bufferGeometry>
         <pointsMaterial
           size={0.06}
